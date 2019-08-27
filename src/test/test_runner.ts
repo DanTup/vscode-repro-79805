@@ -8,6 +8,7 @@ module.exports = {
 	run(testsRoot: string, cb: (error: any, failures?: number) => void): void {
 		// Create the mocha test
 		const mocha = new Mocha({
+			reporter: "list",
 			slow: 10000,       // increased threshold before marking a test as slow
 			timeout: 180000,   // increased timeout because starting up Code, Analyzer, Pub, etc. is slooow
 			ui: "bdd",        // the TDD UI is being used in extension.test.ts (suite, test, etc.)
