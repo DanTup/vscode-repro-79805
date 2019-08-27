@@ -21,49 +21,7 @@ services:
   - xvfb
 
 before_install:
-  - echo Misc setup
   - export ELECTRON_NO_ATTACH_CONSOLE=1
-  - export TRAVIS_COMMIT_AUTHOR="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
-  - gem install dpl
-  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then
-      export DART_OS=macos;
-    else
-      export DART_OS=linux;
-    fi
-  - echo Setting variables...
-  - if [[ $ONLY_RUN_DART_VERSION == "STABLE" ]]; then
-      export DART_CHANNEL=stable/release;
-    elif [[ $ONLY_RUN_DART_VERSION == "DEV" ]]; then
-      export DART_CHANNEL=dev/release;
-    else
-      export DART_CHANNEL=be/raw;
-    fi
-  - mkdir -p with\ spaces
-  - cd with\ spaces
-  - echo Downloading Dart...
-  - curl https://storage.googleapis.com/dart-archive/channels/$DART_CHANNEL/latest/sdk/dartsdk-$DART_OS-x64-release.zip > dart-sdk.zip
-  - unzip dart-sdk.zip > /dev/null
-  - echo Configuring Dart...
-  - export DART_PATH=`pwd`/dart-sdk
-
-  # To ensure we follow symlinks properly, put links
-  # in folders that we'll use in PATHs.
-  - mkdir dartsymlinkbins
-  - ln -s ../dart-sdk/bin/dart dartsymlinkbins/dart
-
-  # To ensure we detectonly detect real SDKs and not non-Dartlang
-  # dart binaries, add a fake dart that is actually just echo
-  - mkdir fakedart
-  - ln -s /bin/echo fakedart/dart
-
-  - export DART_PATH_SYMLINK=`pwd`/fakedart:`pwd`/dartsymlinkbins
-  - dart-sdk/bin/dart --version
-  - dartsymlinkbins/dart --version
-  - node --version
-  - npm --version
-  - cd ..
-  - mkdir -p .test_results
-  - mkdir -p .dart_code_test_logs
 
 install:
   - npm ci

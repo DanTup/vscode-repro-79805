@@ -19,26 +19,19 @@ module.exports = {
 
 		// Set up source map support.
 		require("source-map-support").install();
-		console.log("5");
 
 		glob("**/**.test.js", { cwd: testsRoot }, (err, files) => {
-			console.log("6");
 			if (err) {
-				console.log("7");
 				return cb(err);
 			}
-			console.log("8");
 
 			// Add files to the test suite
 			files.forEach((f) => mocha.addFile(path.resolve(testsRoot, f)));
-			console.log("9");
 
 			try {
 				// Run the mocha test
 				mocha.run((failures) => cb(null, failures));
-				console.log("10.1");
 			} catch (err) {
-				console.log("10.2");
 				cb(err);
 			}
 		});
