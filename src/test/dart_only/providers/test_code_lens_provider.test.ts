@@ -1,5 +1,12 @@
+import * as path from "path";
 import * as vs from "vscode";
-import { helloWorldTestMainFile } from "../../helpers";
+
+const dartCodeExtensionIdentifier = "Dart-Code.dart-code";
+const ext = vs.extensions.getExtension(dartCodeExtensionIdentifier);
+const testFolder = path.join(ext.extensionPath, "src/test");
+export const helloWorldFolder = vs.Uri.file(path.join(testFolder, "test_projects/hello_world"));
+export const emptyFile = vs.Uri.file(path.join(helloWorldFolder.fsPath, "lib/empty.dart"));
+export const helloWorldTestMainFile = vs.Uri.file(path.join(helloWorldFolder.fsPath, "test/basic_test.dart"));
 
 function debugCheck(cls: vs.CodeLens[]) {
 	// TEMP DEBUG
@@ -12,11 +19,7 @@ function debugCheck(cls: vs.CodeLens[]) {
 
 describe(`test_code_lens`, () => {
 	console.info(`Starting tests!`);
-	beforeEach("activate", async () => {
-		const dartCodeExtensionIdentifier = "Dart-Code.dart-code";
-		const ext = vs.extensions.getExtension(dartCodeExtensionIdentifier);
-		ext.activate();
-	});
+	beforeEach("activate", () => ext.activate());
 
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((attempt) => {
 		it(`includes run/debug actions for tests (${attempt})`, async () => {
