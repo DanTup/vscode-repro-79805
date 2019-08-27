@@ -8,14 +8,6 @@ export const helloWorldFolder = vs.Uri.file(path.join(testFolder, "test_projects
 export const emptyFile = vs.Uri.file(path.join(helloWorldFolder.fsPath, "lib/empty.dart"));
 export const helloWorldTestMainFile = vs.Uri.file(path.join(helloWorldFolder.fsPath, "test/basic_test.dart"));
 
-function debugCheck(cls: vs.CodeLens[]) {
-	// TEMP DEBUG
-	for (const cl of cls) {
-		if (!cl.command) {
-			throw new Error(`Got code lens without a command! ${JSON.stringify(cl, undefined, 4)}\n\n\nFull response (${cls.length} items) was:${JSON.stringify(cls, undefined, 4)}`);
-		}
-	}
-}
 
 describe(`test_code_lens`, () => {
 	console.info(`Starting tests!`);
@@ -29,7 +21,12 @@ describe(`test_code_lens`, () => {
 			console.info(`Getting code lens!`);
 			const fileCodeLens = await (vs.commands.executeCommand("vscode.executeCodeLensProvider", doc.uri, 500) as Thenable<vs.CodeLens[]>);
 			console.info(`Got ${fileCodeLens.length} code lens`);
-			debugCheck(fileCodeLens);
+
+			for (const cl of fileCodeLens) {
+				if (!cl.command) {
+					throw new Error(`Got code lens without a command! ${JSON.stringify(cl, undefined, 4)}\n\n`);
+				}
+			}
 		});
 	});
 });
