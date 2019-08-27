@@ -11,16 +11,18 @@ function debugCheck(cls: vs.CodeLens[]) {
 }
 
 describe(`test_code_lens`, () => {
+	console.info(`Starting tests!`);
 	before("get packages", () => getPackages());
 	beforeEach("activate", () => activate());
 
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((attempt) => {
+		console.info(`Test${attempt}!`);
 		it(`includes run/debug actions for tests (${attempt})`, async () => {
 			const editor = await openFile(helloWorldTestMainFile);
 			await delay(100);
 
 			const fileCodeLens = await getCodeLens(editor.document);
-			console.log(`Got ${fileCodeLens.length} code lens`);
+			console.info(`Got ${fileCodeLens.length} code lens`);
 			debugCheck(fileCodeLens);
 		});
 	});
