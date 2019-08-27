@@ -1,6 +1,4 @@
 import { CancellationToken, CodeLens, CodeLensProvider, commands, Event, EventEmitter, Range, TextDocument } from "vscode";
-import { IAmDisposable } from "../../shared/interfaces";
-import { TestOutlineInfo } from "../../shared/utils/outline";
 
 export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 	private disposables: IAmDisposable[] = [];
@@ -38,4 +36,17 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 	public dispose(): any {
 		this.disposables.forEach((d) => d.dispose());
 	}
+}
+
+interface IAmDisposable {
+	dispose(): void | Promise<void>;
+
+}
+
+interface TestOutlineInfo {
+	fullName: string;
+	file: string;
+	offset: number;
+	length: number;
+	isGroup: boolean;
 }

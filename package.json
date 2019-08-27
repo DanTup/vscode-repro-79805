@@ -1,9 +1,9 @@
 {
-	"name": "dart-code",
-	"displayName": "Dart",
-	"description": "Dart language support and debugger for Visual Studio Code.",
+	"name": "dart-code-issue-repro",
+	"displayName": "Issue Repro",
+	"description": "Issue repro.",
 	"version": "3.4.0-dev",
-	"publisher": "Dart-Code",
+	"publisher": "issue-repro",
 	"engines": {
 		"vscode": "^1.36.0"
 	},
@@ -1612,56 +1612,6 @@
 					}
 				]
 			}
-		],
-		"taskDefinitions": [
-			{
-				"type": "pub",
-				"required": [],
-				"properties": {
-					"command": {
-						"type": "string"
-					}
-				}
-			},
-			{
-				"type": "flutter",
-				"required": [],
-				"properties": {
-					"command": {
-						"type": "string"
-					}
-				}
-			}
-		],
-		"problemMatchers": [
-			{
-				"name": "dart-pub-build_runner",
-				"label": "Pub: build_runner",
-				"source": "pub",
-				"pattern": [
-					{
-						"regexp": "^\\[SEVERE\\] \\w+ on (.*?)(?: \\(cached\\))?:$",
-						"file": 1
-					},
-					{
-						"regexp": "^Error running .*$"
-					},
-					{
-						"regexp": "^(.*)$",
-						"message": 1
-					},
-					{
-						"regexp": "^package:.*:(\\d+):(\\d+)$",
-						"line": 1,
-						"column": 2
-					}
-				],
-				"background": {
-					"activeOnStart": true,
-					"beginsPattern": "^\\[INFO\\] Starting Build",
-					"endsPattern": "^(\\[INFO\\] Succeeded|\\[SEVERE\\] Failed) after"
-				}
-			}
 		]
 	},
 	"scripts": {
@@ -1674,8 +1624,7 @@
 		"minimatch": "^3.0.4",
 		"semver": "^6.3.0",
 		"vscode-debugadapter": "^1.35.0",
-		"vscode-debugprotocol": "^1.35.0",
-		"ws": "^7.1.1"
+		"vscode-debugprotocol": "^1.35.0"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
@@ -1683,21 +1632,12 @@
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^10.14.15",
 		"@types/semver": "^6.0.1",
-		"@types/sinon": "5.0.5",
 		"@types/vscode": "^1.36.0",
-		"@types/ws": "^6.0.2",
 		"glob": "^7.1.4",
-		"istanbul-instrumenter-loader": "^3.0.1",
 		"mocha": "^5.2.0",
-		"nyc": "^13.3.0",
-		"remap-istanbul": "^0.13.0",
-		"signal-exit": "^3.0.2",
-		"sinon": "^7.3.2",
 		"source-map-support": "^0.5.13",
 		"ts-loader": "^6.0.4",
-		"tslint": "^5.18.0",
 		"typescript": "^3.5.2",
-		"vscode-debugadapter-testsupport": "^1.35.0",
 		"vscode-test": "^1.2.0",
 		"webpack": "^4.39.1",
 		"webpack-cli": "^3.3.5"
