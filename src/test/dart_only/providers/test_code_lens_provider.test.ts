@@ -13,7 +13,7 @@ describe(`test_code_lens`, () => {
 	console.info(`Starting tests!`);
 	before("activate", () => ext.activate());
 
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((attempt) => {
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].forEach((attempt) => {
 		it(`includes run/debug actions for tests (${attempt})`, async () => {
 			const doc = await vs.workspace.openTextDocument(helloWorldTestMainFile);
 			await vs.window.showTextDocument(doc);
