@@ -34,46 +34,23 @@ before_install:
   - echo Setting variables...
   - if [[ $ONLY_RUN_DART_VERSION == "STABLE" ]]; then
       export DART_CHANNEL=stable/release;
-      export FLUTTER_BRANCH=stable;
     elif [[ $ONLY_RUN_DART_VERSION == "DEV" ]]; then
       export DART_CHANNEL=dev/release;
-      export FLUTTER_BRANCH=dev;
     else
       export DART_CHANNEL=be/raw;
-      export FLUTTER_BRANCH=master;
     fi
   - mkdir -p with\ spaces
   - cd with\ spaces
-  - echo Downloading Dart and Flutter...
+  - echo Downloading Dart...
   - curl https://storage.googleapis.com/dart-archive/channels/$DART_CHANNEL/latest/sdk/dartsdk-$DART_OS-x64-release.zip > dart-sdk.zip
   - unzip dart-sdk.zip > /dev/null
-  - mkdir -p flutter
-  - cd flutter
-  - if [[ ! -d .git ]]; then
-      git init;
-      git remote add origin https://github.com/flutter/flutter.git;
-    else
-      git remote set-url origin https://github.com/flutter/flutter.git;
-    fi
-  - git fetch
-  - git reset --hard origin/$FLUTTER_BRANCH
-  - git checkout $FLUTTER_BRANCH --
-  - cd ..
-  - echo Configuring Dart and Flutter...
-  - flutter/bin/flutter config --no-analytics
-  - flutter/bin/flutter update-packages
-  - if [[ $ONLY_RUN_DART_VERSION != "STABLE" ]]; then
-      flutter/bin/flutter config --enable-web;
-    fi
-  - export FLUTTER_PATH=`pwd`/flutter
+  - echo Configuring Dart...
   - export DART_PATH=`pwd`/dart-sdk
 
   # To ensure we follow symlinks properly, put links
   # in folders that we'll use in PATHs.
   - mkdir dartsymlinkbins
   - ln -s ../dart-sdk/bin/dart dartsymlinkbins/dart
-  - mkdir fluttersymlinkbins
-  - ln -s ../flutter/bin/flutter fluttersymlinkbins/flutter
 
   # To ensure we detectonly detect real SDKs and not non-Dartlang
   # dart binaries, add a fake dart that is actually just echo
@@ -81,14 +58,10 @@ before_install:
   - ln -s /bin/echo fakedart/dart
 
   - export DART_PATH_SYMLINK=`pwd`/fakedart:`pwd`/dartsymlinkbins
-  - export FLUTTER_PATH_SYMLINK=`pwd`/fluttersymlinkbins
   - dart-sdk/bin/dart --version
-  - flutter/bin/flutter --version
   - dartsymlinkbins/dart --version
-  - fluttersymlinkbins/flutter --version
   - node --version
   - npm --version
-  - flutter/bin/flutter doctor
   - dart-sdk/bin/pub global activate --no-executables stagehand
   - dart-sdk/bin/pub global activate --no-executables args 1.5.0
   - dart-sdk/bin/pub global activate --no-executables meta 1.1.6
