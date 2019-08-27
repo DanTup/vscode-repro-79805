@@ -60,21 +60,7 @@ function runNode(cwd: string, args: string[], env: any, printTimes = false): Pro
 	});
 }
 
-async function runTests(testFolder: string, workspaceFolder: string, sdkPaths: string, codeVersion: string | undefined, runInfo: string): Promise<void> {
-	console.log("\n\n");
-	console.log(yellow("############################################################"));
-	console.log(
-		yellow("## ")
-		+ `Running ${runInfo} using ${yellow(testFolder)}`
-		+ ` in workspace ${yellow(workspaceFolder)}`
-		+ ` using version ${yellow(codeVersion || "stable")} of Code`);
-	console.log(`${yellow("##")} Looking for SDKs in:`);
-	sdkPaths
-		.split(path.delimiter)
-		.filter((p) => p && p.toLowerCase().indexOf("dart") !== -1 || p.toLowerCase().indexOf("flutter") !== -1)
-		.forEach((p) => console.log(`${yellow("##")}    ${p}`));
-	console.log(yellow("############################################################"));
-
+async function runTests(testFolder: string, workspaceFolder: string, sdkPaths: string, codeVersion: string | undefined): Promise<void> {
 	// For some reason, updating PATH here doesn't get through to Code
 	// even though other env vars do! 😢
 	testEnv.DART_PATH_OVERRIDE = sdkPaths;
@@ -140,10 +126,8 @@ async function runAllTests(): Promise<void> {
 	if (!fs.existsSync(".dart_code_test_logs"))
 		fs.mkdirSync(".dart_code_test_logs");
 
-	const totalRuns = 12;
-	let runNumber = 1;
 	try {
-		await runTests("dart_only", "hello_world", dartSdkPath, codeVersion, `${runNumber++} of ${totalRuns}`);
+		await runTests("dart_only", "hello_world", dartSdkPath, codeVersion);
 	} catch (e) {
 		exitCode = 1;
 		console.error(e);
