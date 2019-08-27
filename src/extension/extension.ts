@@ -10,5 +10,4 @@ export function activate(context: vs.ExtensionContext) {
 	const codeLensProvider = new TestCodeLensProvider();
 	context.subscriptions.push(codeLensProvider);
 	context.subscriptions.push(vs.languages.registerCodeLensProvider(DART_MODE, codeLensProvider));
-
 }

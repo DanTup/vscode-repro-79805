@@ -10,9 +10,11 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 		this.disposables.push(commands.registerCommand("_dart2.startDebuggingTestFromOutline", (test: TestOutlineInfo, launchTemplate: any | undefined) => {
 			// Nothing
 		}));
+		console.log(`Done!`);
 	}
 
 	public provideCodeLenses(document: TextDocument, token: CancellationToken): CodeLens[] | undefined {
+		console.log(`Providing code lens`);
 		const res: CodeLens[] = [];
 		for (let i = 1; i < 30; i++) {
 			res.push(new CodeLens(

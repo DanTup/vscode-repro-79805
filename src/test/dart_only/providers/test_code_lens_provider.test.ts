@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as vs from "vscode";
 
-const dartCodeExtensionIdentifier = "Dart-Code.dart-code";
+const dartCodeExtensionIdentifier = "issue-repro.dart-code-issue-repro";
 const ext = vs.extensions.getExtension(dartCodeExtensionIdentifier);
 const testFolder = path.join(ext.extensionPath, "src/test");
 export const helloWorldFolder = vs.Uri.file(path.join(testFolder, "test_projects/hello_world"));
@@ -11,7 +11,7 @@ export const helloWorldTestMainFile = vs.Uri.file(path.join(helloWorldFolder.fsP
 
 describe(`test_code_lens`, () => {
 	console.info(`Starting tests!`);
-	beforeEach("activate", () => ext.activate());
+	before("activate", () => ext.activate());
 
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((attempt) => {
 		it(`includes run/debug actions for tests (${attempt})`, async () => {
