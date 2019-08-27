@@ -1,5 +1,5 @@
 import * as vs from "vscode";
-import { activate, delay, getCodeLens, getPackages, helloWorldTestMainFile, openFile } from "../../helpers";
+import { activateWithoutAnalysis, delay, getCodeLens, getPackages, helloWorldTestMainFile, openFile } from "../../helpers";
 
 function debugCheck(cls: vs.CodeLens[]) {
 	// TEMP DEBUG
@@ -13,7 +13,7 @@ function debugCheck(cls: vs.CodeLens[]) {
 describe(`test_code_lens`, () => {
 	console.info(`Starting tests!`);
 	before("get packages", () => getPackages());
-	beforeEach("activate", () => activate());
+	beforeEach("activate", () => activateWithoutAnalysis());
 
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((attempt) => {
 		console.info(`Test${attempt}!`);

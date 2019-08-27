@@ -70,6 +70,4 @@ install:
   - npm ci
 
 script:
-  - npm run build
-  - npm run build-tests
-  - npm run test-only
+  - npm test
