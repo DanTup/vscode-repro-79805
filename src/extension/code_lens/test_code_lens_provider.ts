@@ -7,7 +7,7 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 
 	constructor() {
 		console.log(`Creating code lens provider`);
-		this.disposables.push(commands.registerCommand("_dart.startDebuggingTestFromOutline", (test: TestOutlineInfo, launchTemplate: any | undefined) => {
+		this.disposables.push(commands.registerCommand("_dart2.startDebuggingTestFromOutline", (test: TestOutlineInfo, launchTemplate: any | undefined) => {
 			// Nothing
 		}));
 	}
@@ -25,7 +25,7 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 						length: 2,
 						offset: 1,
 					} as TestOutlineInfo],
-					command: "_dart.startDebuggingTestFromOutline",
+					command: "_dart2.startDebuggingTestFromOutline",
 					title: "Run",
 				},
 			));
