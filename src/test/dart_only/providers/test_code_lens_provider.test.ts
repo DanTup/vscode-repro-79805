@@ -20,7 +20,7 @@ describe(`test_code_lens`, () => {
 			await delay(100);
 
 			const fileCodeLens = await getCodeLens(editor.document);
-			console.log(`Got ${fileCodeLens} code lens`);
+			console.log(`Got ${fileCodeLens.length} code lens`);
 			debugCheck(fileCodeLens);
 		});
 	});
