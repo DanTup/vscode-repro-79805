@@ -262,7 +262,7 @@ export function activate(context: vs.ExtensionContext, isRestart: boolean = fals
 	rankingCodeActionProvider.registerProvider(new IgnoreLintCodeActionProvider(activeFileFilters));
 	context.subscriptions.push(vs.languages.registerImplementationProvider(DART_MODE, implementationProvider));
 	if (config.showTestCodeLens) {
-		const codeLensProvider = new TestCodeLensProvider(logger, analyzer);
+		const codeLensProvider = new TestCodeLensProvider();
 		context.subscriptions.push(codeLensProvider);
 		context.subscriptions.push(vs.languages.registerCodeLensProvider(DART_MODE, codeLensProvider));
 	}
