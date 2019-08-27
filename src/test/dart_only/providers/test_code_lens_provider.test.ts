@@ -1,5 +1,5 @@
 import * as vs from "vscode";
-import { activateWithoutAnalysis, delay, getCodeLens, getPackages, helloWorldTestMainFile, openFile } from "../../helpers";
+import { activateWithoutAnalysis, delay, getCodeLens, getPackages, helloWorldTestMainFile } from "../../helpers";
 
 function debugCheck(cls: vs.CodeLens[]) {
 	// TEMP DEBUG
@@ -24,12 +24,15 @@ describe(`test_code_lens`, () => {
 	});
 
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((attempt) => {
-		console.info(`Going to run test ${attempt}!`);
 		it(`includes run/debug actions for tests (${attempt})`, async () => {
-			console.info(`Inside test ${attempt}!`);
-			const editor = await openFile(helloWorldTestMainFile);
+			console.info(`Opening doc ${attempt}!`);
+			const doc = await vs.workspace.openTextDocument(helloWorldTestMainFile);
+			console.info(`Showing doc!`);
+			const editor = await vs.window.showTextDocument(doc);
+			console.info(`Delaying 100!`);
 			await delay(100);
 
+			console.info(`Getting code lens!`);
 			const fileCodeLens = await getCodeLens(editor.document);
 			console.info(`Got ${fileCodeLens.length} code lens`);
 			debugCheck(fileCodeLens);

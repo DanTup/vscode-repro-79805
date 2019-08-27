@@ -8,6 +8,7 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 	public readonly onDidChangeCodeLenses: Event<void> = this.onDidChangeCodeLensesEmitter.event;
 
 	constructor() {
+		console.log(`Creating code lens provider`);
 		this.disposables.push(commands.registerCommand("_dart.startDebuggingTestFromOutline", (test: TestOutlineInfo, launchTemplate: any | undefined) => {
 			// Nothing
 		}));
@@ -15,7 +16,7 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 
 	public provideCodeLenses(document: TextDocument, token: CancellationToken): CodeLens[] | undefined {
 		const res: CodeLens[] = [];
-		for (let i = 1; 1 < 30; i++) {
+		for (let i = 1; i < 30; i++) {
 			res.push(new CodeLens(
 				new Range(document.positionAt(i), document.positionAt(i + 1)),
 				{
