@@ -71,4 +71,4 @@ install:
 
 script:
   - npm run lint
-  - npm test-only
+  - npm run test-only
