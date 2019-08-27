@@ -18,13 +18,13 @@ describe(`test_code_lens`, () => {
 			const doc = await vs.workspace.openTextDocument(helloWorldTestMainFile);
 			await vs.window.showTextDocument(doc);
 
-			console.info(`Getting code lens!`);
 			const fileCodeLens = await (vs.commands.executeCommand("vscode.executeCodeLensProvider", doc.uri, 500) as Thenable<vs.CodeLens[]>);
-			console.info(`Got ${fileCodeLens.length} code lens`);
+			console.info(`On attempt ${attempt}, got ${fileCodeLens.length} code lens`);
 
 			for (const cl of fileCodeLens) {
 				if (!cl.command) {
-					throw new Error(`Got code lens without a command! ${JSON.stringify(cl, undefined, 4)}\n\n`);
+					console.error(`On attempt ${attempt}, got a code lens without any command! ${JSON.stringify(cl, undefined, 4)}`);
+					throw new Error(`On attempt ${attempt}, got a code lens without any command! ${JSON.stringify(cl, undefined, 4)}`);
 				}
 			}
 		});

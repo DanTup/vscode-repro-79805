@@ -14,9 +14,8 @@ export class TestCodeLensProvider implements CodeLensProvider, IAmDisposable {
 	}
 
 	public provideCodeLenses(document: TextDocument, token: CancellationToken): CodeLens[] | undefined {
-		console.log(`Providing code lens`);
 		const res: CodeLens[] = [];
-		for (let i = 1; i < 30; i++) {
+		for (let i = 0; i < 30; i++) {
 			res.push(new CodeLens(
 				new Range(document.positionAt(i), document.positionAt(i + 1)),
 				{
